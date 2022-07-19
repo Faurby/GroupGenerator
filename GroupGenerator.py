@@ -25,17 +25,14 @@ def printGroups(list):
         print("Group " + str(i+1) + ": " + str(list[i]))
 
 # Check last group if it is not too small.
-print("============== BEFORE =================")
-printGroups(final_list)
-
 last = final_list[-1]
 if len(last) < peopleInGroup-1:
     for i in range(peopleInGroup-1-len(last)):
         final_list[-1].append(final_list[-2 - i][0])
         final_list[-2 - i] = final_list[-2 - i][1:]
 
-print("============== AFTER =================")
 printGroups(final_list)
+print("\nSådan manner, CSV fil laver med grupper.\n")
 
 with open('miniprojektGrupper.csv', 'w', encoding="UTF8", newline='') as f:
     writer = csv.writer(f)
