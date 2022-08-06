@@ -7,14 +7,16 @@ import pandas as pd
 excel_data = pd.read_excel('BSc-2021-nye-studerende-1.xlsx')
 
 # Convert to dataframe and specific fields
-df = pd.DataFrame(excel_data, columns=['SWU'])
+studyLine = input("Study line (select between SWU, GBI, BDDIT, BDS): \n")
+df = pd.DataFrame(excel_data, columns=[studyLine])
 
-# Convert to list
+# Remove NaN values, convert to list and shuffle
+df.dropna(inplace=True)
 nestedLists = df.values.tolist()
 names = [x for xs in nestedLists for x in xs]
 random.shuffle(names)
 
-peopleInGroup = int(input("How many people in group? "))
+peopleInGroup = int(input("How many people in a group? "))
 
 # Group generator function. Takes a list of names and a number of people in group.
 final_list = [names[i:i + peopleInGroup] for i in range(0, len(names), peopleInGroup)]
@@ -32,7 +34,7 @@ if len(last) < peopleInGroup-1:
         final_list[-2 - i] = final_list[-2 - i][1:]
 
 printGroups(final_list)
-print("\nSådan manner, CSV fil laver med grupper.\n")
+print("\Successfully created groups, CSV file has been generated.\n")
 
 with open('miniprojektGrupper.csv', 'w', encoding="UTF8", newline='') as f:
     writer = csv.writer(f)
