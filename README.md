@@ -18,7 +18,7 @@ file is stored
 
 * To install dependencies if you need them:
 
-        `pip install -r requirements.txt`
+        pip install -r requirements.txt
 
 
 # How to run this bad boi
